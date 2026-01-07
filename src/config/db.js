@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
   const dbURL = process.env.DB_URL;
+  console.log(dbURL);
 
   if (!dbURL) {
     console.error("Database URL is not defined in env file");
@@ -36,7 +37,7 @@ const connectDB = async () => {
       process.exit(0);
     });
   } catch (error) {
-    console.error("mongodb connection failed".error.message);
+    console.error("mongodb connection failed".error);
     process.exit(1);
   }
 };

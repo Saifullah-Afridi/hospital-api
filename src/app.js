@@ -1,7 +1,7 @@
-require("dotenv").config({ path: "../.env" });
+require("dotenv").config({ path: "./env" });
+const express = require("express");
 
 //npm packages
-const express = require("express");
 const connectDB = require("./config/db");
 
 //custom modules
@@ -15,7 +15,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 
 //database connection
-connectDB();
+connectDB().then(() => console.log("COnnected"));
 
 //starting server
 const PORT = process.env.PORT || 5000;

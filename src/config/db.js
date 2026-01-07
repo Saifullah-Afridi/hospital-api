@@ -2,18 +2,13 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
   const dbURL = process.env.DB_URL;
-  console.log(dbURL);
 
   if (!dbURL) {
     console.error("Database URL is not defined in env file");
     process.exit(1);
   }
-
   try {
-    await mongoose.connect(dbURL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(dbURL);
 
     console.log("Database connected successfully");
 

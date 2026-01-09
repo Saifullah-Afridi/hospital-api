@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema(
   {
@@ -40,15 +40,15 @@ const userSchema = new mongoose.Schema(
 
 //key point....if you change the password you must call on save() to runs this pre
 
-userSchema.pre("save", async function (next) {
+//!cost me 2 hrs
+userSchema.pre("save", function () {
   //the logic is here
   //if the password is not modified just return and run the next middleware if it exist
-  if (!this.isModified("password")) return next();
+  if (!this.isModified("password")) return;
 
-  this.password = await bcrypt.hash(this.password, 10);
+  this.password = bcrypt.hashSync(this.password, 10);
 
-  //if we ommit the next() then the response will stuck in this method
-  next();
+  //!please do not use async and next in same function for pre...it is deppricated
 });
 
 //instance method ....it is on each object

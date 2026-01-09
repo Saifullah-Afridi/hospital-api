@@ -6,13 +6,22 @@ const connectDB = require("./config/db");
 
 //custom modules
 const authRoutes = require("./api/auth/auth.routes");
+const userRoutes = require("./api/users/user.routes");
+const errorMiddleware = require("./middleware/error.middleware");
 const app = express();
 
 //middlewares
 app.use(express.json());
 
 //routes
+app.get("/", (req, res) => {
+  res.status(200).send("Hello there");
+});
 app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+
+//* global error handler
+app.use(errorMiddleware);
 
 //database connection
 connectDB();

@@ -1,25 +1,32 @@
-const User = require("./user.modelUser");
+const AppError = require("../../utils/AppError");
+const User = require("./user.model");
 
-export const registerUser = async (req, res) => {
+const registerUser = async (req, res, next) => {
   const { name, email, password } = req.body;
- 
+
   try {
-    
-  
     const isUser = await User.findOne({ email });
-    if(isUser){
-        return res.status(400).json({message:"User already exist"})
+    if (isUser) {
+      return next(
+        new AppError("User is already registered with this email", 400)
+      );
     }
 
-    
     const newUser = await User.create({
-        name,email,password
-    })
+      name,
+      email,
+      password: "password",
+    });
 
+    newUser.password = undefined;
 
-    newUser.password = undefined
-    res.status(201).json({message:"User has been created successfully",newUser)
-} catch (error) {
-   res.status(500).json({message:error.message}) 
-  }  
+    res
+      .status(201)
+      .json({ message: "User has been created successfully", newUser });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
 };
+
+module.exports = { registerUser };

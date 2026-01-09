@@ -17,7 +17,7 @@ const login = async (req, res, next) => {
       return next(new AppError("Invalid credentials", 401));
     }
 
-    const isPasswordMatch = await user.comparePassword(password);
+    const isPasswordMatch = user.comparePassword(password);
 
     if (!isPasswordMatch) {
       return next(new AppError("Please provide correct credientials", 401));

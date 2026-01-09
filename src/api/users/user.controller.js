@@ -15,7 +15,7 @@ const registerUser = async (req, res, next) => {
     const newUser = await User.create({
       name,
       email,
-      password: "password",
+      password: password,
     });
 
     newUser.password = undefined;

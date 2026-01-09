@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema(
 );
 
 //this pre save runs only when the user is first created
-//or save() method is called
+//or save method is called
 //so it means that whenever we call on save method
 //this method will run and the password which is already hashed
 //will hashed again
@@ -52,8 +52,10 @@ userSchema.pre("save", function () {
 });
 
 //instance method ....it is on each object
-userSchema.methods.comparePassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
+userSchema.methods.comparePassword = function (enteredPassword) {
+  console.log(enteredPassword);
+
+  return bcrypt.compareSync(enteredPassword, this.password);
 };
 
 const User = mongoose.model("User", userSchema);

@@ -1,0 +1,34 @@
+```
+└── 📁src
+    └── 📁api
+        └── 📁auth
+            ├── auth.controller.js
+            ├── auth.routes.js
+            ├── service.js
+        └── 📁patients
+            ├── patient.controller.js
+            ├── patient.model.js
+            ├── patient.routes.js
+        └── 📁users
+            ├── user.controller.js
+            ├── user.model.js
+            ├── user.routes.js
+        └── 📁visits
+            ├── visit.controller.js
+            ├── visit.model.js
+            ├── visit.routes.js
+        ├── user.service.js
+    └── 📁config
+        ├── db.js
+    └── 📁middleware
+        ├── aut.middleware.js
+        ├── error.middleware.js
+        ├── role.middleware.js
+        ├── validateLogin.js
+        ├── validateRegister.js
+    └── 📁utils
+        ├── AppError.js
+        ├── catchAsync.js
+        ├── generateToken.js
+    └── app.js
+```
